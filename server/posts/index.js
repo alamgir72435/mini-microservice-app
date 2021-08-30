@@ -6,6 +6,17 @@ app.use(express.json());
 app.use(require("cors")());
 const posts = {};
 
+app.get("/", (req, res) => {
+	res.json({ data: process.env });
+});
+
+app.get("/check", (req, res) => {
+	const data = {
+		pid: process.pid,
+	};
+	res.json(data);
+});
+
 app.get("/posts", (req, res) => {
 	res.send(posts);
 });
@@ -30,6 +41,7 @@ app.post("/posts", async (req, res) => {
 });
 
 app.post("/events", (req, res) => {
+	console.log("v20");
 	console.log("Received Event", req.body.type);
 	res.send({});
 });
